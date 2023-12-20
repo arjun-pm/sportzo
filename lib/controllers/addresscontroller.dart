@@ -48,7 +48,6 @@ Future<void>getAdress()async{
     pinadd = addressData?.getString("pincode");
     placeadd = addressData?.getString("place");
     update();
-
 }
 
 setAddressButtonname()async{
