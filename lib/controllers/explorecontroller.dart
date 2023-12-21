@@ -15,7 +15,6 @@ class ExploreController extends GetxController {
     "assets/images/Pumasneaker2.jpg",
     "assets/images/PumaSneaker3.jpg",
     "assets/images/Pumasneakers4.jpg",
-
   ].obs;
   RxList pumawearsimg = [
     "assets/images/Pumawear1.jpg",

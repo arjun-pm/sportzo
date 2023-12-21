@@ -38,6 +38,7 @@ class Sneakers_category extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 20,
+
                     mainAxisSpacing: 20),
                 itemBuilder: (context, index) {
                   return Padding(
