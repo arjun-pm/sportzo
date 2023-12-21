@@ -30,13 +30,13 @@ class ExplorePage extends StatelessWidget {
                 actions: [
                   TextButton(
                     onPressed: () {
-                      // Navigator.pop(context);
+                      Get.back();
                     },
                     child: const Text('Yes'),
                   ),
                   TextButton(
                     onPressed: () {
-                      // Get.back();
+                      Get.back();
                     },
                     child: const Text('No'),
                   ),
@@ -218,14 +218,17 @@ class ExplorePage extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).pushNamed("Newarrivalbookingpage",arguments: Customvariable["image"]);
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              "Newarrivalbookingpage",
+                              arguments: Customvariable["image"]);
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.height / 3.5,
                           decoration: BoxDecoration(
                               color: const Color(0xFFD9D9D9),
-                              border: Border.all(color: const Color(0xFFD9D9D9))),
+                              border:
+                                  Border.all(color: const Color(0xFFD9D9D9))),
                           child: Stack(
                             children: [
                               Container(
@@ -246,20 +249,23 @@ class ExplorePage extends StatelessWidget {
                                     ),
                                   )),
                               Positioned(
-
                                 bottom: 20,
                                 child: Row(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(left: 5),
-                                      child: Text("Rs:${Customvariable["price"]}/-"),
+                                      child: Text(
+                                          "Rs:${Customvariable["price"]}/-"),
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.height / 12,
+                                      width:
+                                          MediaQuery.of(context).size.height /
+                                              12,
                                     ),
                                     Row(
                                       children: [
-                                        const Icon(Icons.star,color: Colors.black,size: 15),
+                                        const Icon(Icons.star,
+                                            color: Colors.black, size: 15),
                                         Text(Customvariable["rating"]),
                                       ],
                                     )

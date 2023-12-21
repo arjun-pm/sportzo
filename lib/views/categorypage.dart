@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sportzo/controllers/explorecontroller.dart';
+import 'package:sportzo/views/sneakersCategory.dart';
 
 import '../Mapvalues/brandvalues.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+  Categories({Key? key}) : super(key: key);
+
+  ExploreController exploreController = Get.put(ExploreController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +60,24 @@ class Categories extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  width: MediaQuery.of(context).size.height / 4.5,
-                  child: Image(
-                    image: AssetImage(
-                      categoryitems["Shoesimages"],
+                InkWell(
+                  onTap: () {
+                    Get.to(Sneakers_category(
+                      brands: categoryitems["Shoes"],
+                    ));
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 4,
+                    width: MediaQuery.of(context).size.height / 4.5,
+                    child: Image(
+                      image: AssetImage(
+                        categoryitems["Shoesimages"],
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
                   ),
                 ),
                 Container(
@@ -78,17 +90,26 @@ class Categories extends StatelessWidget {
                 )
               ],
             ),
-          ),Padding(
-            padding: const EdgeInsets.only(left:36.0,right:21,top: 10),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 36.0, right: 21, top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(categoryitems["Shoes"] ,style: GoogleFonts.raleway(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,),),
-                Text(categoryitems["Sportswear"],style: GoogleFonts.raleway(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,),)
+                Text(
+                  categoryitems["Shoes"],
+                  style: GoogleFonts.raleway(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  categoryitems["Sportswear"],
+                  style: GoogleFonts.raleway(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
               ],
             ),
           ),

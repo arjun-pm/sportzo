@@ -1,27 +1,25 @@
-import 'dart:ffi';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sportzo/controllers/explorecontroller.dart';
 import 'package:sportzo/widgets/newaddress.dart';
-
-import '../Mapvalues/newarrivalsvalues.dart';
 import '../controllers/addresscontroller.dart';
+import '../Mapvalues/newarrivalsvalues.dart';
 
 class NewarrivalBooking extends StatelessWidget {
   NewarrivalBooking({Key? key}) : super(key: key);
 
   final ExploreController exploreController2 = Get.put(ExploreController());
-  final Addresscontroller addresscontroller1 = Get.put(Addresscontroller());
+  final Addresscontroller addresscontroller = Get.put(Addresscontroller());
 
   @override
   Widget build(BuildContext context) {
     final itemimage = ModalRoute.of(context)?.settings.arguments;
     final newarrivalitems =
         newarrival.firstWhere((element) => element["image"] == itemimage);
- addresscontroller1.getAdress();
-  addresscontroller1.getAddressButtonname();
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -123,8 +121,8 @@ class NewarrivalBooking extends StatelessWidget {
                     Obx(
                       () => DropdownButton(
                         value: exploreController2.selectedQuantity.value,
-                        items: exploreController2.quantity
-                            .map((String quantity) {
+                        items:
+                            exploreController2.quantity.map((String quantity) {
                           return DropdownMenuItem(
                             value: quantity,
                             child: Text(quantity),
@@ -153,54 +151,76 @@ class NewarrivalBooking extends StatelessWidget {
                     Text("Address",
                         style: GoogleFonts.raleway(
                             fontSize: 20, fontWeight: FontWeight.w500)),
-                  Newaddress(
-                          buttonname: addresscontroller1.buttonname == true
-                              ? "Change"
-                              : "Add",
-                        ),
+                    Obx(
+                      () => Newaddress(
+                        buttonname: addresscontroller.buttonname.value == true
+                            ? "Add"
+                            : "Change",
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10, left: 10),
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 5,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border:
-                          Border.all(color: Colors.grey.shade400, width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(2))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(addresscontroller1.nameadd!,
-                          style: GoogleFonts.raleway(
-                            fontSize: 17,
-                          )),
-                      Text(addresscontroller1.numberadd!,
-                          style: GoogleFonts.raleway(
-                            fontSize: 17,
-                          )),
-                      Text(addresscontroller1.addressadd!,
-                          style: GoogleFonts.raleway(
-                            fontSize: 17,
-                          )),
-                      Text(addresscontroller1.placeadd!,
-                          style: GoogleFonts.raleway(
-                            fontSize: 17,
-                          )),
-                      Text(addresscontroller1.pinadd!,
-                          style: GoogleFonts.raleway(
-                            fontSize: 17,
-                          ))
-                    ],
-                  ),
-                ),
-              )
+              Obx(
+                () => addresscontroller.buttonname.value == false
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 10, left: 10),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 5.5,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.grey.shade400, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(2))),
+                          child: Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(addresscontroller.nameadd.value,
+                                      style: GoogleFonts.raleway(
+                                        fontSize: 17,
+                                      )),
+                                  Text(addresscontroller.numberadd.value,
+                                      style: GoogleFonts.raleway(
+                                        fontSize: 17,
+                                      )),
+                                  Text(addresscontroller.addressadd.value,
+                                      style: GoogleFonts.raleway(
+                                        fontSize: 17,
+                                      )),
+                                  Text(addresscontroller.placeadd.value,
+                                      style: GoogleFonts.raleway(
+                                        fontSize: 17,
+                                      )),
+                                  Text(addresscontroller.pinadd.value,
+                                      style: GoogleFonts.raleway(
+                                        fontSize: 17,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ),
             ],
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+            ),
+            onPressed: () {},
+            child: Text("Book Now",
+                style: GoogleFonts.raleway(
+                    fontSize: 20, fontWeight: FontWeight.w500))),
       ),
     );
   }
